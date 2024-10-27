@@ -1,0 +1,12 @@
+#component-wrap{
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    color: white;
+}
