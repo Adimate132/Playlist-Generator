@@ -1,3 +1,4 @@
+import os
 import mlflow  # Logging models and managing MLFlow experiments
 from mlflow import pyfunc
 from transformers import pipeline  # Loading Hugging Face model
@@ -47,7 +48,6 @@ async def generate_playlist(request: LyricsRequest):
 
         total_mood = []
         total_confidence = []
-
         playlist = []
 
         for i, result in enumerate(results):
@@ -79,12 +79,12 @@ async def generate_playlist(request: LyricsRequest):
 
 # OPTIONAL: Add the code to log the model to MLFlow
 if __name__ == "__main__":
+    # Prevent mlruns folder from being created
+    os.environ["MLFLOW_TRACKING_URI"] = "/dev/null"
+    
     # Set experiment name
     mlflow.set_experiment("playlist-gen-experiment")
-    # Start run to log model
-    with mlflow.start_run():  # Log model under specified name
-        pyfunc.log_model("bart-mnli-model", python_model=BartMNLIModel())
+    
     # Run FastAPI app
-    import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)  # Specify host and port
     logging.info("Running...")
