@@ -86,5 +86,5 @@ if __name__ == "__main__":
         pyfunc.log_model("bart-mnli-model", python_model=BartMNLIModel())
     # Run FastAPI app
     import uvicorn
-    uvicorn.run(app, host="localhost", port=8000)  # Specify host and port
+    uvicorn.run(app, host="0.0.0.0", port=8000)  # Specify host and port
     logging.info("Running...")
