@@ -15,7 +15,10 @@ export default function Landing() {
             {/* <img src={cell} className="logo" alt="cell aura" />
             <h1>i actually fuck with bbw's nigga</h1>
             <h2>Landing</h2> */}
-            <input type='text' placeholder='Enter a mood:'/>
+            <div id='content-wrap'>
+                    <input className='spotify-input' type='text' placeholder='Enter a mood:'/>
+            </div>
+                
         </div>
         
       
