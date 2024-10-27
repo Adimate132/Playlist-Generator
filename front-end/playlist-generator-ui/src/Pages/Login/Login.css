@@ -1,5 +1,5 @@
 .body-wrap{
-    background-color: brown;
+    background: linear-gradient(to top, black 55%, rgb(75, 75, 75));
     min-height: 100vh;
     min-width: 100vw;
     
@@ -9,12 +9,12 @@
     width: 400px;
     height: 500px;
     margin: 50px auto 0 auto;
-    border: 5px groove blueviolet; /* Border for the box */
-    border-radius: 10px; /* Rounded corners */
-    background-color: #fff; /* Optional background color */
+    border: 5px groove rgb(83, 83, 83); /* Border for the box */
+    border-radius: 5px; /* Rounded corners */
+    background: linear-gradient(to bottom, #000, #555); /* Gradient from black to grey */
     text-align: center;
 }
 
 h1{
-    color: black;
+    color: white;
 }

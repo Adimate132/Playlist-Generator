@@ -1,10 +1,39 @@
 #component-wrap{
+    background: linear-gradient(to top, black 55%, rgb(75, 75, 75));
     min-height: 100vh;
     min-width: 100vw;
-    background-color: rgb(168, 77, 77);
+    /* margin: 50px auto 0 auto; */
+    background: linear-gradient(to bottom, #000, #555); /* Gradient from black to grey */
    
 }
+#content-wrap{
+    border-radius: 5px; /* Rounded corners */
+    display: block;
+    justify-content: center;
+}
+
+
 
 h1{
     color: white;
 }
+.spotify-input {
+    width: 80%; /* Full width of the container */
+    padding: 10px; /* Inner padding */
+    border: none; /* Remove default border */
+    border-radius: 25px; /* Rounded corners */
+    background-color: #282828; /* Dark background color */
+    color: #fff; /* White text color */
+    font-size: 16px; /* Font size */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: background-color 0.3s; /* Smooth transition for hover/focus */
+  }
+  
+  .spotify-input::placeholder {
+    color: #b3b3b3; /* Placeholder text color */
+  }
+  
+  .spotify-input:focus {
+    outline: none; /* Remove default focus outline */
+    background-color: #333; /* Slightly lighter background on focus */
+  }
