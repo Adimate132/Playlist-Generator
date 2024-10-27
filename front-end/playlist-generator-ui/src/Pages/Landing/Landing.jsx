@@ -12,10 +12,10 @@ export default function Landing() {
         <div id='component-wrap'>
             
             <Navbar/>
-            <img src={cell} className="logo" alt="cell aura" />
+            {/* <img src={cell} className="logo" alt="cell aura" />
             <h1>i actually fuck with bbw's nigga</h1>
-            <h2>Landing</h2>
-            <input type='text'/>
+            <h2>Landing</h2> */}
+            <input type='text' placeholder='Enter a mood:'/>
         </div>
         
       

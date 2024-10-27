@@ -1,0 +1,20 @@
+.body-wrap{
+    background-color: brown;
+    min-height: 100vh;
+    min-width: 100vw;
+    
+}
+
+.login-wrap {
+    width: 400px;
+    height: 500px;
+    margin: 50px auto 0 auto;
+    border: 5px groove blueviolet; /* Border for the box */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #fff; /* Optional background color */
+    text-align: center;
+}
+
+h1{
+    color: black;
+}

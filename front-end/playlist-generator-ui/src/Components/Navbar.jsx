@@ -1,22 +1,32 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import './Navbar.css';
+import { useNavigate } from 'react-router-dom'
+import icon from '/Moodify Icon.png'
+
 
 const Navbar = () => {
-  return (
-    <nav className="navbar">
-      <ul className="navbar-list">
-        <li className="navbar-item">
-          <Link to="/">i</Link>
-        </li>
-        <li className="navbar-item">
-          <Link to="/Landing">fw</Link>
-        </li>
-        <li className="navbar-item">
-          <Link to="/Login">bbws</Link>
-        </li>
-      </ul>
-    </nav>
+    const navigate = useNavigate();
+  return (    
+    
+        <div id='navbar-wrap'>
+            
+            <ul>
+            
+                <li>
+                    <Link to="/">
+                        <img src={icon} className="logo" alt="Moodify Icon" />
+                    </Link>
+                </li>
+                <li><Link to="/">Moodify</Link></li>
+                <li><Link to="/Login">Login</Link></li>
+                
+            </ul>
+            
+        </div>
+
+    
+
   );
 };
 

@@ -1,0 +1,38 @@
+#navbar-wrap {
+    min-height: 8vh;
+    width: 100%;
+    display: flex;
+    
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: transparent;
+
+    background-color: #333;
+    
+
+}
+
+  
+  #navbar-wrap ul {
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Use Flexbox for horizontal layout */
+    justify-content: space-between; /* Spread items evenly */
+  }
+  
+  #navbar-wrap li {
+    margin-right: 20px; /* Space between items */
+  }
+  
+  #navbar-wrap a {
+    color: white; /* Text color for links */
+    text-decoration: none; /* Remove underline */
+  }
+  
+  #navbar-wrap a:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+  
