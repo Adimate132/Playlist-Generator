@@ -1,5 +1,5 @@
 ﻿# Welcome to Moodify! 
-Feeling under the weather today? Is your day too good to be true? Did get a message from that special person today? with **Moodify** you can generate a playlist that matches your energy.
+Feeling under the weather today? Is your day too good to be true? Did you get a message from that special person today? with **Moodify** you can generate a playlist that matches your energy.
 You pick your desired topics and we'll take care of the rest.
 
 **Moodify** is a free **AI powered** playlist generator service.

@@ -41,10 +41,10 @@ dotenv.config();
 
 
 // Start server
-const port = process.env.PORT || 3001; // Default to 3000 if PORT is undefined
+const port = process.env.PORT; // Default to 3000 if PORT is undefined
 app.listen(port, () => {
   console.log(
-      `Playlist Generator Server listening on port ${process.env.PORT}
+      `Playlist Generator Server listening on port ${port}
     Listening at ${process.env.DEVELOPMENT_BASE_URL || port}`
   );
 });
