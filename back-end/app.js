@@ -3,8 +3,10 @@ import express from 'express';
 import fetch from 'node-fetch';
 import qs from 'qs';
 
-const app = express();
 
+// middleware --------------
+const app = express();
+app.use(express.json());
 // Middleware to fetch the access token
 const fetchAccessToken = async (req, res, next) => {
     try {
@@ -43,7 +45,7 @@ const port = process.env.PORT || 3001; // Default to 3000 if PORT is undefined
 app.listen(port, () => {
   console.log(
       `Playlist Generator Server listening on port ${process.env.PORT}
-    Listening at ${process.env.DEVELOPMENT_BASE_URL}`
+    Listening at ${process.env.DEVELOPMENT_BASE_URL || port}`
   );
 });
 
@@ -57,24 +59,24 @@ app.get('/', (req, res) => {
 });
 
 // Example endpoint to demonstrate the use of the access token
-app.get('/api/albums/:id', fetchAccessToken, async (req, res) => {
+app.post('/getUserProfile', fetchAccessToken, async (req, res) => {
     try {
-        const { id } = req.params;
-        const albumResponse = await fetch(`https://api.spotify.com/v1/albums/${id}`, {
-            method: 'GET',
+        console.log(req.body)
+        const { username: username } = req.body;
+
+        const response = await fetch(`https://api.spotify.com/v1/users/${username}`, {
+            method: "GET",
             headers: {
-                'Authorization': `Bearer ${req.accessToken}`, // Use the token from middleware
-            },
+                "Authorization": `Bearer ${req.accessToken}`
+            }
         });
+        const data = await response.json();
+        
+        console.log(data);
 
-        if (!albumResponse.ok) {
-            return res.status(albumResponse.status).json({ error: 'Failed to fetch album data' });
-        }
-
-        const albumData = await albumResponse.json();
-        res.json(albumData);
-    } catch (error) {
-        console.error('Error fetching album data:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(200).json({user_profile: data});
     }
-});
+    catch(e) {
+        res.status(400).json({error: e.message});
+    }
+})
