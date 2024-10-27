@@ -11,7 +11,7 @@ const Routing = () => {
       <BrowserRouter>
         <Routes>
             <Route path="/" element={<Landing/>} />
-            <Route path="/login" component={<Login/>} />
+            <Route path="/Login" element={<Login/>} />
             <Route path="*" render={() => <Redirect to="/" />} />
         </Routes>
       </BrowserRouter>

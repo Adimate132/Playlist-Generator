@@ -5,7 +5,7 @@ import './main.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <div>
+    <div className='navbar-padding'>
       <Routing />
     </div>
   </StrictMode>
