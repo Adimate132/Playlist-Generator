@@ -1,8 +1,7 @@
 fastapi
 uvicorn
-mlflow
-transformers
-pydantic
 torch
+transformers
+mlflow
 
 # others...
