@@ -1,4 +1,3 @@
-import os
 import mlflow  # Logging models and managing MLFlow experiments
 from mlflow import pyfunc
 from transformers import pipeline  # Loading Hugging Face model
@@ -6,7 +5,9 @@ import uvicorn
 from fastapi import FastAPI, HTTPException  # FastAPI for building APIs
 from fastapi.responses import JSONResponse  # Importing JSONResponse for custom responses
 from pydantic import BaseModel  # Data validation using Pydantic
-import logging
+
+# Set MLflow tracking URI to a non-existent directory to avoid file creation
+mlflow.set_tracking_uri('/non_existent_directory')
 
 # The class encapsulates the function of the zero-shot classification model from HuggingFace.
 class BartMNLIModel(pyfunc.PythonModel):
@@ -20,7 +21,6 @@ class BartMNLIModel(pyfunc.PythonModel):
         # Zero-shot classification for each text input
         results = [self.model(t, candidate_labels) for t in text]
         return results  # returns predictions as a list
-
 
 #********************************** API ENDPOINTS ***********************************
 app = FastAPI()  # Creating FastAPI instance
@@ -77,14 +77,6 @@ async def generate_playlist(request: LyricsRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# OPTIONAL: Add the code to log the model to MLFlow
+# Run FastAPI app
 if __name__ == "__main__":
-    # Prevent mlruns folder from being created
-    os.environ["MLFLOW_TRACKING_URI"] = "/dev/null"
-    
-    # Set experiment name
-    mlflow.set_experiment("playlist-gen-experiment")
-    
-    # Run FastAPI app
     uvicorn.run(app, host="0.0.0.0", port=8000)  # Specify host and port
-    logging.info("Running...")
