@@ -1,10 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import './Navbar.css';
-import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-    const navigate = useNavigate();
   return (
     <nav className="navbar">
       <ul className="navbar-list">
