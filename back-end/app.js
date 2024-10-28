@@ -2,11 +2,16 @@ import dotenv from 'dotenv';
 import express from 'express';
 import fetch from 'node-fetch';
 import qs from 'qs';
-
+import cors from 'cors'
 
 // middleware --------------
 const app = express();
+app.use(cors()) // allow requests from anywhere
 app.use(express.json());
+if (process.env.NODE_ENV !== 'production') { // if NODE_ENV is found, then prod env variables are being used
+    console.log('Loading environment variables from local')
+    dotenv.config();
+}
 // Middleware to fetch the access token
 const fetchAccessToken = async (req, res, next) => {
     try {
