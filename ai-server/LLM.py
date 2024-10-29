@@ -5,6 +5,7 @@ import uvicorn
 from fastapi import FastAPI, HTTPException  # FastAPI for building APIs
 from fastapi.responses import JSONResponse  # Importing JSONResponse for custom responses
 from pydantic import BaseModel  # Data validation using Pydantic
+import os 
 
 # Set MLflow tracking URI to a non-existent directory to avoid file creation
 mlflow.set_tracking_uri('/non_existent_directory')
@@ -79,4 +80,5 @@ async def generate_playlist(request: LyricsRequest):
 
 # Run FastAPI app
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)  # Specify host and port
+    port = int(os.environ.get("PORT", 8000))  # Use PORT from environment variable, default to 8000
+    uvicorn.run(app, host="0.0.0.0", port=port)  # Specify host and port
