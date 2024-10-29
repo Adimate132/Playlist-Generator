@@ -15,7 +15,8 @@ mlflow.set_tracking_uri('/non_existent_directory')
 # The class encapsulates the function of the zero-shot classification model from HuggingFace.
 class BartMNLIModel(pyfunc.PythonModel):
     def __init__(self):
-        self.model = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")  # Load the model
+        # Load the model only once during initialization
+        self.model = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")  
 
     def predict(self, context, model_input):
         text = model_input['text']
@@ -24,6 +25,9 @@ class BartMNLIModel(pyfunc.PythonModel):
         # Zero-shot classification for each text input
         results = [self.model(t, candidate_labels) for t in text]
         return results  # returns predictions as a list
+
+# Create a single instance of the model at startup
+model_instance = BartMNLIModel()
 
 #********************************** API ENDPOINTS ***********************************
 app = FastAPI()  # Creating FastAPI instance
@@ -44,7 +48,6 @@ async def root():
     """
     return JSONResponse(content={"status": "success", "message": "AI Server is up and running!"})
 
-
 @app.post("/api/generate_playlist")
 async def generate_playlist(request: LyricsRequest):
     """
@@ -56,27 +59,35 @@ async def generate_playlist(request: LyricsRequest):
     Returns:
         JSONResponse: A response containing total mood, total confidence, and playlist details.
     """
+    # Validate input
+    if not request.lyrics or not request.candidate_labels:
+        raise HTTPException(status_code=400, detail="Invalid input: lyrics and candidate_labels are required.")
+
     try:
-        model = BartMNLIModel()  # Creating instance of logged model
-        results = model.predict(None, {'text': request.lyrics, 'candidate_labels': request.candidate_labels})
+        # Use the pre-loaded model instance for predictions
+        results = model_instance.predict(None, {'text': request.lyrics, 'candidate_labels': request.candidate_labels})
 
         total_mood = []
         total_confidence = []
         playlist = []
 
         for i, result in enumerate(results):
-            labels = result['labels']  # Mood labels for the current lyrics
-            scores = result['scores']  # Confidence scores for the current lyrics
+            if 'labels' in result and 'scores' in result:
+                labels = result['labels']  # Mood labels for the current lyrics
+                scores = result['scores']  # Confidence scores for the current lyrics
 
-            # Append total mood and confidence
-            total_mood.append(labels[0])  # Append the best label for this song
-            total_confidence.append(scores[0])  # Append the confidence score for this song
-            
-            # Construct playlist entry
-            playlist.append({
-                "labels": labels,
-                "scores": scores
-            })
+                # Append total mood and confidence
+                total_mood.append(labels[0])  # Append the best label for this song
+                total_confidence.append(scores[0])  # Append the confidence score for this song
+
+                # Construct playlist entry
+                playlist.append({
+                    "labels": labels,
+                    "scores": scores
+                })
+            else:
+                # Handle unexpected result structure
+                raise HTTPException(status_code=500, detail="Unexpected model output format")
 
         # Construct the response
         response_content = {
@@ -90,8 +101,7 @@ async def generate_playlist(request: LyricsRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
 # Run FastAPI app
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 3000))  # Use PORT from environment variable, default to 8000
+    port = int(os.environ.get("PORT", 3000))  # Use PORT from environment variable, default to 3000
     uvicorn.run(app, host="0.0.0.0", port=port)  # Specify host and port
