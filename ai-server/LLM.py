@@ -31,6 +31,17 @@ class LyricsRequest(BaseModel):
     lyrics: list[str]  # Array of strings representing song lyrics
     candidate_labels: list[str]  # List of genres/moods
 
+# Health check endpoint at the base URL
+@app.get("/")
+async def root():
+    """
+    Base endpoint to verify the server is up and running.
+    
+    Returns:
+        JSONResponse: A response containing the status of the server.
+    """
+    return JSONResponse(content={"status": "success", "message": "AI Server is up and running!"})
+
 
 @app.post("/api/generate_playlist")
 async def generate_playlist(request: LyricsRequest):
