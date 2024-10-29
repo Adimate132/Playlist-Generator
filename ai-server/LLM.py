@@ -1,3 +1,5 @@
+# START COMMAND FOR RAILWAY (PRODUCTION): python -m uvicorn LLM:app --host 0.0.0.0 --port $PORT
+# START COMMAND FOR LOCAL (DEVELOPMENT): python llm.py
 import mlflow  # Logging models and managing MLFlow experiments
 from mlflow import pyfunc
 from transformers import pipeline  # Loading Hugging Face model
@@ -91,5 +93,5 @@ async def generate_playlist(request: LyricsRequest):
 
 # Run FastAPI app
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))  # Use PORT from environment variable, default to 8000
+    port = int(os.environ.get("PORT", 3000))  # Use PORT from environment variable, default to 8000
     uvicorn.run(app, host="0.0.0.0", port=port)  # Specify host and port
