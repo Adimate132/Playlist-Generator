@@ -36,6 +36,7 @@ img{
   }
   
   #navbar-wrap a {
+    font-size: 1.5rem; /* Adjusted so that size is scalable */
     color: white; /* Text color for links */
     text-decoration: none; /* Remove underline */
   }
