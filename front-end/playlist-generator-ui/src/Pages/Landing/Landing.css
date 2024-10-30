@@ -1,57 +1,60 @@
-#component-wrap{
-    background: linear-gradient(to top, black 55%, rgb(75, 75, 75));
-    min-height: 100vh;
-    min-width: 100vw;
-    
-    background: linear-gradient(to bottom, #000, #555); /* Gradient from black to grey */
-   
+.page-wrap{
+  background: linear-gradient(to top, black 55%, rgb(75, 75, 75));
+  height: 100dvh;
+  background: linear-gradient(to bottom, #000, #555); /* Gradient from black to grey */
+  
 }
-#content-wrap{
-    border-radius: 5px; /* Rounded corners */
-    display: flex;
-    justify-content: center; 
-    height: 500px;
-    background-image: url("../public/moodify banner.jpg");
-    background-size: cover;
-    padding: 10px 0 60px 0; 
-    
-    
-
+.page-content {
+  background-image: url("../public/moodify banner.jpg");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
 }
-.moodify-logo {
-    width: auto; /* Maintain aspect ratio */
-    height: 50%; /* Fill the container height */
-    position: relative;
-    left: 50%; /* Shift to the right */
-    transform: translateX(-50%); /* Center horizontally */
-  }
-
-
-
 
 h1{
-    color: white;
+  color: white;
 }
 .spotify-input {
-    height: 10%;
-    width: 80%; /* Full width of the container */
-    padding: 10px; /* Inner padding */
-    border: none; /* Remove default border */
-    border-radius: 25px; /* Rounded corners */
-    background-color: #282828; /* Dark background color */
-    color: #fff; /* White text color */
-    font-size: 16px; /* Font size */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-  }
-  .spotify-input:hover{
-    transition: background-color 0.3s;
-  }
-  
-  .spotify-input::placeholder {
-    color: #b3b3b3; /* Placeholder text color */
-  }
-  
-  .spotify-input:focus {
-    outline: none; /* Remove default focus outline */
-    background-color: #333; /* Slightly lighter background on focus */
-  }
+  height: 10%;
+  padding: 10px; /* Inner padding */
+  border: none; /* Remove default border */
+  border-radius: 25px; /* Rounded corners */
+  background-color: #282828 !important; /* Dark background color */
+  color: #fff; /* White text color */
+  font-size: 16px; /* Font size */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+.spotify-input:hover{
+  transition: background-color 0.3s;
+}
+
+.spotify-input::placeholder {
+  color: #b3b3b3; /* Placeholder text color */
+}
+
+.spotify-input:focus {
+  outline: none; /* Remove default focus outline */
+  background-color: #333; /* Slightly lighter background on focus */
+}
+
+
+.greet-user {
+  text-align: center;
+}
+
+.greet-user img {
+  width: 200px;
+  height: auto;
+}
+
+.menu-wrap {
+  min-width: 600px;
+  text-align: center;
+  margin-top: 2rem;
+  border-radius: 35px;
+  padding: 3rem;
+  backdrop-filter: blur(25px);
+}
