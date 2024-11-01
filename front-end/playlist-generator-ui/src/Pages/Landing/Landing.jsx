@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 export default function Landing() {
     const navigate = useNavigate();
     const [userInfo, setUserInfo] = useState(null);
+    const [complete, setComplete] = useState(null);
     
     useEffect(() => {
         if (!sessionStorage.getItem('spotifyUser')) { // if spotifyUser does not exist in s.storage
@@ -37,7 +38,9 @@ export default function Landing() {
                     <input className='spotify-input' type='text' placeholder='Enter a mood:'/>
                     {userInfo != null ?
                         <div className='greet-user'>
-                            <img src={userInfo.user_profile.images[0] ? userInfo.user_profile.images[0].url : logo} alt="your pfp" />
+                            <div className='profile-image-wrap'>
+                                <img src={userInfo.user_profile.images[0] ? userInfo.user_profile.images[0].url : logo} alt="your pfp" />
+                            </div>
                             <h1> Hello {userInfo.user_profile.display_name}! </h1>
                         </div>
                         : // if no user info...
@@ -45,6 +48,26 @@ export default function Landing() {
                             <h1> Loading... </h1>
                         </div>
                     }
+
+                    <div className='generated-playlist'>
+                            {complete ?
+                                <h1 className='container-text'> Playlist generated </h1>
+                                :
+                                <h1 className='container-text' > Generating songs based off of your TOP 50 </h1>
+                            }
+                        <div className='song'>
+                            <div> imagine this is a song </div>
+                        </div>
+                        <div className='song'>
+                            <div> imagine this is a song </div>
+                        </div>
+                        <div className='song'>
+                            <div> imagine this is a song </div>
+                        </div>
+                        <div className='song'>
+                            <div> imagine this is a song </div>
+                        </div>
+                    </div>
                 </div>
             </div>
                 
